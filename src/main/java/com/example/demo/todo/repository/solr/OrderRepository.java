@@ -10,7 +10,7 @@ import org.springframework.data.solr.repository.SolrCrudRepository;
 
 import java.util.List;
 
-public interface OrderRepository extends CustomRepository, SolrCrudRepository<Order, Long> {
+public interface OrderRepository extends CustomRepository, ASTRepository, SolrCrudRepository<Order, Long> {
 
     Order findByOrderId(Long orderid);
 
@@ -19,8 +19,9 @@ public interface OrderRepository extends CustomRepository, SolrCrudRepository<Or
 
     @Query("orderDescription:*?0* OR orderName:*?0* OR productName:*?0*")
     @Highlight(prefix = "<b>", postfix = "</b>")
-    HighlightPage<Order> findByCustomerQuery(String searchTerm, Pageable pageable);
+    HighlightPage<Order> findByCustomQuery(String searchTerm, Pageable pageable);
 
     List<Order> findByOrderNameEndingWith(String name);
+
     List<Order> findByOrderNameEndingWithAndProductNameStartingWith(String orderName, String productName);
 }

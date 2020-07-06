@@ -11,7 +11,6 @@ import java.io.IOException;
 @Component
 public class CORSFilter implements Filter {
 
-
     static Logger logger = LoggerFactory.getLogger(CORSFilter.class);
 
     @Override
